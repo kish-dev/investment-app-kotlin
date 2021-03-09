@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">TickerApp</string>
+    <string name="stocks_tab">Stocks</string>
+    <string name="favorite_tab">Favorite</string>
 </resources>

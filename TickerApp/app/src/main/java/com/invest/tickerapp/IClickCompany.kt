@@ -1,6 +1,6 @@
 package com.invest.tickerapp
 
-import com.invest.tickerapp.model.Company
+import com.invest.tickerapp.model.data.Company
 
 interface IClickCompany {
     fun onCheck(company: Company)

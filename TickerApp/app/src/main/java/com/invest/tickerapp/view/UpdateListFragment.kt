@@ -4,7 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.invest.tickerapp.IClickCompany
 import com.invest.tickerapp.adapter.CardAdapter
-import com.invest.tickerapp.model.Company
+import com.invest.tickerapp.model.data.Company
 
 open class UpdateListFragment : Fragment() {
 

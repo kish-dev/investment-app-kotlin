@@ -4,12 +4,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.invest.tickerapp.R
-import com.invest.tickerapp.model.Company
+import com.invest.tickerapp.model.data.Company
+import com.invest.tickerapp.model.network.Repository
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-class ConfigureViewModel : ViewModel() {
+class ConfigureViewModel() : ViewModel() {
     private val _favoriteList = MutableLiveData<MutableList<Company>>()
     val favoriteList: LiveData<MutableList<Company>>
         get() = _favoriteList
@@ -19,59 +21,86 @@ class ConfigureViewModel : ViewModel() {
         get() = _stocksList
 
     init {
-        viewModelScope.launch(Dispatchers.Default) {
-            val list = listOf(
-                Company(
-                    "Yandex, LLC",
-                    "YNDX",
-                    "4 764,6 ₽",
-                    "+55 ₽ (1,15%)",
-                    R.drawable.logo_yndx,
-                    true
-                ),
-                Company(
-                    "Apple Inc.",
-                    "AAPL",
-                    "$131.93",
-                    "+$0.12 (1,15%)",
-                    R.drawable.logo_aapl,
-                    true
-                ),
-                Company(
-                    "Alphabet Class A",
-                    "GOOGL",
-                    "$1 825",
-                    "+$0.12 (1,15%)",
-                    R.drawable.logo_googl,
-                    false
-                ),
-                Company(
-                    "Amazon.com",
-                    "AMZN",
 
-                    "$3 204",
-                    "-$0.12 (1,15%)",
-                    R.drawable.logo_amzn,
-                    false
-                ),
-                Company(
-                    "Bank od America Corp",
-                    "BAC",
-                    "$3 204",
-                    "+$0.12 (1,15%)",
-                    R.drawable.logo_bac,
-                    false
-                ),
-                Company(
-                    "Microsoft Corporation",
-                    "MSFT",
-                    "$3 204",
-                    "+$0.12 (1,15%)",
-                    R.drawable.logo_msft,
-                    false
+        viewModelScope.launch(Dispatchers.Main) {
+
+            val list: MutableList<Company>
+
+            val Yandex = withContext(Dispatchers.Default) {
+                Repository.calculateCostAndDeltaCost(
+                    Company.ListOfCompaniesLoader.listOfCompanies[0],
+                    Company.ListOfCompaniesLoader.listOfTickers[0],
+                    "c12e84v48v6oi252mgog"
                 )
+            }
+            val Apple = withContext(Dispatchers.Default) {
+                Repository.calculateCostAndDeltaCost(
+                    Company.ListOfCompaniesLoader.listOfCompanies[1],
+                    Company.ListOfCompaniesLoader.listOfTickers[1],
+                    "c12e84v48v6oi252mgog"
+                )
+            }
+            val Google = withContext(Dispatchers.Default) {
+                Repository.calculateCostAndDeltaCost(
+                    Company.ListOfCompaniesLoader.listOfCompanies[2],
+                    Company.ListOfCompaniesLoader.listOfTickers[2],
+                    "c12e84v48v6oi252mgog"
+                )
+            }
+            val Amazon = withContext(Dispatchers.Default) {
+                Repository.calculateCostAndDeltaCost(
+                    Company.ListOfCompaniesLoader.listOfCompanies[3],
+                    Company.ListOfCompaniesLoader.listOfTickers[3],
+                    "c12e84v48v6oi252mgog"
+                )
+            }
+            val Bac = withContext(Dispatchers.Default) {
+                Repository.calculateCostAndDeltaCost(
+                    Company.ListOfCompaniesLoader.listOfCompanies[4],
+                    Company.ListOfCompaniesLoader.listOfTickers[4],
+                    "c12e84v48v6oi252mgog"
+                )
+            }
+            val Microsoft = withContext(Dispatchers.Default) {
+                Repository.calculateCostAndDeltaCost(
+                    Company.ListOfCompaniesLoader.listOfCompanies[5],
+                    Company.ListOfCompaniesLoader.listOfTickers[5],
+                    "c12e84v48v6oi252mgog"
+                )
+            }
+            val Tesla = withContext(Dispatchers.Default) {
+                Repository.calculateCostAndDeltaCost(
+                    Company.ListOfCompaniesLoader.listOfCompanies[6],
+                    Company.ListOfCompaniesLoader.listOfTickers[6],
+                    "c12e84v48v6oi252mgog"
+                )
+            }
+            val Ma = withContext(Dispatchers.Default) {
+                Repository.calculateCostAndDeltaCost(
+                    Company.ListOfCompaniesLoader.listOfCompanies[7],
+                    Company.ListOfCompaniesLoader.listOfTickers[7],
+                    "c12e84v48v6oi252mgog"
+                )
+            }
+            list = mutableListOf(
+                Yandex,
+                Apple,
+                Google,
+                Amazon,
+                Bac,
+                Microsoft,
+                Tesla,
+                Ma
             )
-            _stocksList.postValue(list)
+            if (_stocksList.value.isNullOrEmpty()) {
+
+                _stocksList.postValue(list)
+                //TODO init favoriteList too
+
+            } else {
+                _stocksList.postValue(stocksList.value)
+                _favoriteList.postValue(favoriteList.value)
+            }
         }
     }
 
