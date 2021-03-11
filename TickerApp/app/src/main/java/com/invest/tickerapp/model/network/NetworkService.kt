@@ -1,6 +1,6 @@
 package com.invest.tickerapp.model.network
 
-import com.invest.tickerapp.model.di.JSONFinHubApi
+import com.invest.tickerapp.model.di.FinHubApi
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -26,8 +26,8 @@ object NetworkService {
         .client(client.build())
         .build()
 
-    fun getJSONApi(): JSONFinHubApi? {
-        return retrofit.create(JSONFinHubApi::class.java)
+    fun getJSONApi(): FinHubApi? {
+        return retrofit.create(FinHubApi::class.java)
     }
 
 }

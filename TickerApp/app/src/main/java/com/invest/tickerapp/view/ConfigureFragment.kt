@@ -55,8 +55,8 @@ class ConfigureFragment : Fragment() {
             when (position) {
                 0 -> return resources.getText(com.invest.tickerapp.R.string.stocks_tab)
                 1 -> return resources.getText(com.invest.tickerapp.R.string.favorite_tab)
+                else -> return null
             }
-            return null
         }
     }
 

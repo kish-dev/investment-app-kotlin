@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.invest.tickerapp.IClickCompany
+import com.invest.tickerapp.R
 import com.invest.tickerapp.databinding.CardCaptionedItemBinding
 import com.invest.tickerapp.model.data.Company
 
@@ -43,10 +44,10 @@ class CardAdapter(var listData: List<Company>) :
                 }
             }
             val colorRes = if (position % 2 == 0)
-                android.R.color.white
+                view.root.resources.getColor(R.color.background__cv_white)
             else
-                android.R.color.holo_green_light
-            cardView.setCardBackgroundColor(ContextCompat.getColor(root.context, colorRes))
+                view.root.resources.getColor(R.color.background__cv_blue)
+            cardView.setCardBackgroundColor(colorRes)
             companyText.text = company.companyName
             tickerText.text = company.companyTicker
             costText.text = company.cost

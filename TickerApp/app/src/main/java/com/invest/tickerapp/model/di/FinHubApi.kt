@@ -6,7 +6,7 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-interface JSONFinHubApi {
+interface FinHubApi {
     @GET("quote")
     suspend fun getQuote(@Query("symbol") symbol: String,
                @Query("token") token: String) : Quote

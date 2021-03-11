@@ -6,10 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.invest.tickerapp.model.data.Company
 import com.invest.tickerapp.model.network.Repository
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 
 class ConfigureViewModel() : ViewModel() {
     private val _favoriteList = MutableLiveData<MutableList<Company>>()
@@ -24,83 +21,23 @@ class ConfigureViewModel() : ViewModel() {
 
         viewModelScope.launch(Dispatchers.Main) {
 
-            val list: MutableList<Company>
+            var list: MutableList<Company> = mutableListOf()
+            for (i in Company.ListOfCompaniesLoader.listOfCompanies.indices) {
+                var company: Company? = null
+                CoroutineScope(Dispatchers.Default).launch {
+                    company = (Repository.calculateCostAndDeltaCost(
+                        Company.ListOfCompaniesLoader.listOfCompanies[i],
+                        Company.ListOfCompaniesLoader.listOfTickers[i],
+                        "c12e84v48v6oi252mgog"
+                    )
+                            )
+                }
+                delay(1000L)
+                list.add(company!!)
+            }
 
-            val Yandex = withContext(Dispatchers.Default) {
-                Repository.calculateCostAndDeltaCost(
-                    Company.ListOfCompaniesLoader.listOfCompanies[0],
-                    Company.ListOfCompaniesLoader.listOfTickers[0],
-                    "c12e84v48v6oi252mgog"
-                )
-            }
-            val Apple = withContext(Dispatchers.Default) {
-                Repository.calculateCostAndDeltaCost(
-                    Company.ListOfCompaniesLoader.listOfCompanies[1],
-                    Company.ListOfCompaniesLoader.listOfTickers[1],
-                    "c12e84v48v6oi252mgog"
-                )
-            }
-            val Google = withContext(Dispatchers.Default) {
-                Repository.calculateCostAndDeltaCost(
-                    Company.ListOfCompaniesLoader.listOfCompanies[2],
-                    Company.ListOfCompaniesLoader.listOfTickers[2],
-                    "c12e84v48v6oi252mgog"
-                )
-            }
-            val Amazon = withContext(Dispatchers.Default) {
-                Repository.calculateCostAndDeltaCost(
-                    Company.ListOfCompaniesLoader.listOfCompanies[3],
-                    Company.ListOfCompaniesLoader.listOfTickers[3],
-                    "c12e84v48v6oi252mgog"
-                )
-            }
-            val Bac = withContext(Dispatchers.Default) {
-                Repository.calculateCostAndDeltaCost(
-                    Company.ListOfCompaniesLoader.listOfCompanies[4],
-                    Company.ListOfCompaniesLoader.listOfTickers[4],
-                    "c12e84v48v6oi252mgog"
-                )
-            }
-            val Microsoft = withContext(Dispatchers.Default) {
-                Repository.calculateCostAndDeltaCost(
-                    Company.ListOfCompaniesLoader.listOfCompanies[5],
-                    Company.ListOfCompaniesLoader.listOfTickers[5],
-                    "c12e84v48v6oi252mgog"
-                )
-            }
-            val Tesla = withContext(Dispatchers.Default) {
-                Repository.calculateCostAndDeltaCost(
-                    Company.ListOfCompaniesLoader.listOfCompanies[6],
-                    Company.ListOfCompaniesLoader.listOfTickers[6],
-                    "c12e84v48v6oi252mgog"
-                )
-            }
-            val Ma = withContext(Dispatchers.Default) {
-                Repository.calculateCostAndDeltaCost(
-                    Company.ListOfCompaniesLoader.listOfCompanies[7],
-                    Company.ListOfCompaniesLoader.listOfTickers[7],
-                    "c12e84v48v6oi252mgog"
-                )
-            }
-            list = mutableListOf(
-                Yandex,
-                Apple,
-                Google,
-                Amazon,
-                Bac,
-                Microsoft,
-                Tesla,
-                Ma
-            )
-            if (_stocksList.value.isNullOrEmpty()) {
-
-                _stocksList.postValue(list)
-                //TODO init favoriteList too
-
-            } else {
-                _stocksList.postValue(stocksList.value)
-                _favoriteList.postValue(favoriteList.value)
-            }
+            //TODO init favoriteList too
+            _stocksList.postValue(list)
         }
     }
 
