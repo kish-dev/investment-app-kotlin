@@ -1,6 +1,5 @@
 package com.invest.tickerapp
 
-//import com.invest.tickerapp.model.network.NetworkService
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.Menu
@@ -17,7 +16,7 @@ class MainActivity : AppCompatActivity() {
     //TODO init in app or SaveInstanceState (saving List stocks
     //TODO Glide (ImageView)
     //TODO Search in ConfigureFragment, update list
-    lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityMainBinding
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,9 +28,6 @@ class MainActivity : AppCompatActivity() {
         ).commit()
         setContentView(binding.root)
     }
-
-
-
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu, menu)

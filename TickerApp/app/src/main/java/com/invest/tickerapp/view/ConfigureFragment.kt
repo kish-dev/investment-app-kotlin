@@ -26,7 +26,7 @@ class ConfigureFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         viewModel = ViewModelProvider(this).get(ConfigureViewModel::class.java)
         binding = FragmentConfigureBinding.inflate(inflater, container, false)
         return binding.root
@@ -50,12 +50,11 @@ class ConfigureFragment : Fragment() {
             }
 
         override fun getCount(): Int = 2
-
-        override fun getPageTitle(position: Int): CharSequence? {
-            when (position) {
-                0 -> return resources.getText(com.invest.tickerapp.R.string.stocks_tab)
-                1 -> return resources.getText(com.invest.tickerapp.R.string.favorite_tab)
-                else -> return null
+        override fun getPageTitle(position: Int) : CharSequence? {
+            return when (position) {
+                0 -> resources.getText(com.invest.tickerapp.R.string.stocks_tab)
+                1 -> resources.getText(com.invest.tickerapp.R.string.favorite_tab)
+                else -> null
             }
         }
     }

@@ -3,12 +3,14 @@ package com.invest.tickerapp.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.invest.tickerapp.model.data.Company
+import com.invest.tickerapp.model.data.Company.ListOfCompaniesLoader.listOfCompanies
+import com.invest.tickerapp.model.data.Company.ListOfCompaniesLoader.listOfTickers
 import com.invest.tickerapp.model.network.Repository
 import kotlinx.coroutines.*
 
-class ConfigureViewModel() : ViewModel() {
+@Suppress("NAME_SHADOWING")
+class ConfigureViewModel : ViewModel() {
     private val _favoriteList = MutableLiveData<MutableList<Company>>()
     val favoriteList: LiveData<MutableList<Company>>
         get() = _favoriteList
@@ -18,27 +20,20 @@ class ConfigureViewModel() : ViewModel() {
         get() = _stocksList
 
     init {
-
-        viewModelScope.launch(Dispatchers.Main) {
-
-            var list: MutableList<Company> = mutableListOf()
-            for (i in Company.ListOfCompaniesLoader.listOfCompanies.indices) {
-                var company: Company? = null
-                CoroutineScope(Dispatchers.Default).launch {
-                    company = (Repository.calculateCostAndDeltaCost(
-                        Company.ListOfCompaniesLoader.listOfCompanies[i],
-                        Company.ListOfCompaniesLoader.listOfTickers[i],
+        CoroutineScope(Dispatchers.Default).launch {
+           val list = withContext(Dispatchers.Default) {
+                listOfCompanies.mapIndexed { i, company ->
+                    Repository.calculateCostAndDeltaCost(
+                        company,
+                        listOfTickers[i],
                         "c12e84v48v6oi252mgog"
                     )
-                            )
                 }
-                delay(1000L)
-                list.add(company!!)
             }
 
-            //TODO init favoriteList too
             _stocksList.postValue(list)
         }
+
     }
 
     fun addToFavoriteList(company: Company) {

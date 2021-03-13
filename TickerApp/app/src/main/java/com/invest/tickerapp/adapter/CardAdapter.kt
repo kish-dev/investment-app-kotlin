@@ -9,7 +9,6 @@ import com.invest.tickerapp.R
 import com.invest.tickerapp.databinding.CardCaptionedItemBinding
 import com.invest.tickerapp.model.data.Company
 
-@Suppress("DEPRECATION")
 class CardAdapter(var listData: List<Company>) :
     RecyclerView.Adapter<CardAdapter.CardViewHolder>() {
     private var onClickAction: IClickCompany? = null
@@ -43,10 +42,11 @@ class CardAdapter(var listData: List<Company>) :
                     onClickAction?.onUncheck(company)
                 }
             }
+            val resources = view.root.resources
             val colorRes = if (position % 2 == 0)
-                view.root.resources.getColor(R.color.background__cv_white)
+                resources.getColor(R.color.background__cv_white)
             else
-                view.root.resources.getColor(R.color.background__cv_blue)
+                resources.getColor(R.color.background__cv_blue)
             cardView.setCardBackgroundColor(colorRes)
             companyText.text = company.companyName
             tickerText.text = company.companyTicker

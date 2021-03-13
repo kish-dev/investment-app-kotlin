@@ -2,10 +2,6 @@ package com.invest.tickerapp.model.network
 
 import android.util.Log
 import com.invest.tickerapp.model.data.Company
-import com.invest.tickerapp.model.data.Quote
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 object Repository {
 
@@ -16,7 +12,7 @@ object Repository {
     ): Company {
         val service = NetworkService.getJSONApi()
         try {
-            var result = service!!.getQuote(ticker, token)
+            val result = service!!.getQuote(ticker, token)
 
             company.cost = result.currentPrice
             var delta = (result.currentPrice.toDouble() - result.closePrice.toDouble())

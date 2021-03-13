@@ -11,18 +11,6 @@ data class Company(
     var star: Boolean
 ) {
     object ListOfCompaniesLoader {
-
-        val listOfTickers: MutableList<String> = mutableListOf(
-            "YNDX",
-            "AAPL",
-            "GOOGL",
-            "AMZN",
-            "BAC",
-            "MSFT",
-            "TSLA",
-            "MA"
-        )
-
         val listOfCompanies: MutableList<Company> = mutableListOf(
             Company(
                 "Yandex, LLC",
@@ -90,7 +78,6 @@ data class Company(
                 false
             )
         )
-
+        val listOfTickers: List<String> =  listOfCompanies.map{it.companyTicker}
     }
-
 }
