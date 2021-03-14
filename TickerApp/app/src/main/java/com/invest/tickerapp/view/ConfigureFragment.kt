@@ -13,7 +13,6 @@ import com.invest.tickerapp.databinding.FragmentConfigureBinding
 import com.invest.tickerapp.model.data.Company
 import com.invest.tickerapp.viewmodel.ConfigureViewModel
 
-
 class ConfigureFragment : Fragment() {
 
     private val stocksFragment = StocksFragment()

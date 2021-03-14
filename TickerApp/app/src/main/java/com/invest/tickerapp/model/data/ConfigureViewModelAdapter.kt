@@ -1,16 +1,17 @@
-package com.invest.tickerapp.model.network
+package com.invest.tickerapp.model.data
 
-import android.util.Log
-import com.invest.tickerapp.model.data.Company
+import com.invest.tickerapp.model.network.NetworkService
+import kotlin.math.absoluteValue
 
-object Repository {
+object ConfigureViewModelAdapter {
+
+    private val service by lazy{NetworkService.finHubApi()}
 
     suspend fun calculateCostAndDeltaCost(
         company: Company,
         ticker: String,
         token: String
     ): Company {
-        val service = NetworkService.getJSONApi()
         try {
             val result = service!!.getQuote(ticker, token)
 
@@ -19,9 +20,7 @@ object Repository {
 
             val sign = if (delta < 0) '-' else '+'
 
-            if (sign == '-') {
-                delta *= -1
-            }
+            delta = delta.absoluteValue
 
             company.deltaCost = String.format("%.2f", delta)
 
@@ -29,10 +28,12 @@ object Repository {
 
             val percentString = String.format("%.2f", percent)
 
-            company.deltaCost = ("${sign}$${company.deltaCost} (${percentString}%)")
+
+            company.deltaCost = "${sign}$${company.deltaCost} (${percentString}%)"
+            company.cost = "$${company.cost}"
 
         } catch (e: Exception) {
-            Log.e("CompanyLoader", "${e.message}")
+            e.printStackTrace()
         }
         return company
     }

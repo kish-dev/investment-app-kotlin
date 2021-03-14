@@ -23,7 +23,7 @@ data class Company(
             Company(
                 "Apple Inc.",
                 "AAPL",
-                "$131.93",
+                "$1311111111111.93",
                 "+$0.12 (1,15%)",
                 R.drawable.logo_aapl,
                 false
@@ -31,7 +31,7 @@ data class Company(
             Company(
                 "Alphabet Class A",
                 "GOOGL",
-                "$1 825",
+                "$1 1111111111825",
                 "+$0.12 (1,15%)",
                 R.drawable.logo_googl,
                 false
@@ -40,7 +40,7 @@ data class Company(
                 "Amazon.com",
                 "AMZN",
 
-                "$3 204",
+                "$31111111 204",
                 "-$0.12 (1,15%)",
                 R.drawable.logo_amzn,
                 false
@@ -48,7 +48,7 @@ data class Company(
             Company(
                 "Bank od America Corp",
                 "BAC",
-                "$3 204",
+                "$311111111111 204",
                 "+$0.12 (1,15%)",
                 R.drawable.logo_bac,
                 false
@@ -56,7 +56,7 @@ data class Company(
             Company(
                 "Microsoft Corporation",
                 "MSFT",
-                "$3 204",
+                "$111111111113 204",
                 "+$0.12 (1,15%)",
                 R.drawable.logo_msft,
                 false
@@ -64,7 +64,7 @@ data class Company(
             Company(
                 "Tesla Motors",
                 "TSLA",
-                "$3 204",
+                "$311111111111 204",
                 "+$0.12 (1,15%)",
                 R.drawable.logo_tsla,
                 false
@@ -72,7 +72,7 @@ data class Company(
             Company(
                 "Mastercard",
                 "MA",
-                "$3 204",
+                "$311111111111111 204",
                 "+$0.12 (1,15%)",
                 R.drawable.logo_ma,
                 false

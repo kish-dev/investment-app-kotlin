@@ -6,10 +6,9 @@ import androidx.lifecycle.ViewModel
 import com.invest.tickerapp.model.data.Company
 import com.invest.tickerapp.model.data.Company.ListOfCompaniesLoader.listOfCompanies
 import com.invest.tickerapp.model.data.Company.ListOfCompaniesLoader.listOfTickers
-import com.invest.tickerapp.model.network.Repository
+import com.invest.tickerapp.model.data.ConfigureViewModelAdapter
 import kotlinx.coroutines.*
 
-@Suppress("NAME_SHADOWING")
 class ConfigureViewModel : ViewModel() {
     private val _favoriteList = MutableLiveData<MutableList<Company>>()
     val favoriteList: LiveData<MutableList<Company>>
@@ -20,20 +19,19 @@ class ConfigureViewModel : ViewModel() {
         get() = _stocksList
 
     init {
+
         CoroutineScope(Dispatchers.Default).launch {
            val list = withContext(Dispatchers.Default) {
                 listOfCompanies.mapIndexed { i, company ->
-                    Repository.calculateCostAndDeltaCost(
+                    ConfigureViewModelAdapter.calculateCostAndDeltaCost(
                         company,
                         listOfTickers[i],
                         "c12e84v48v6oi252mgog"
                     )
                 }
             }
-
             _stocksList.postValue(list)
         }
-
     }
 
     fun addToFavoriteList(company: Company) {

@@ -18,8 +18,7 @@ class MainActivity : AppCompatActivity() {
     //TODO Search in ConfigureFragment, update list
     private lateinit var binding: ActivityMainBinding
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
+        override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(LayoutInflater.from(this))
         val transaction = supportFragmentManager.beginTransaction()
@@ -27,10 +26,5 @@ class MainActivity : AppCompatActivity() {
             ConfigureFragment()
         ).commit()
         setContentView(binding.root)
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu, menu)
-        return super.onCreateOptionsMenu(menu)
     }
 }
