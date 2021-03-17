@@ -8,4 +8,6 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="blue">#F0F4F7</color>
+    <color name="background__cv_blue">#F0F4F7</color>
+    <color name="background__cv_white">#FFFFFFFF</color>
 </resources>

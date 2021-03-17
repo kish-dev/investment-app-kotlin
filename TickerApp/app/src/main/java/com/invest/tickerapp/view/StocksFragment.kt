@@ -14,7 +14,7 @@ class StocksFragment : UpdateListFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentStocksBinding.inflate(inflater, container, false)
         initRecycler(binding.stocksRecycler)
         return binding.root

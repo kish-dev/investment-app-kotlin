@@ -13,7 +13,7 @@ class FavoriteFragment : UpdateListFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentFavoriteBinding.inflate(inflater, container, false)
         initRecycler(binding.favoriteRecycler)
         return binding.root

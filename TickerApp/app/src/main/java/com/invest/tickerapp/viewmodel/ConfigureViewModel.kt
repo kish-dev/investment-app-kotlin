@@ -3,11 +3,11 @@ package com.invest.tickerapp.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.invest.tickerapp.R
-import com.invest.tickerapp.model.Company
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import com.invest.tickerapp.model.data.Company
+import com.invest.tickerapp.model.data.Company.ListOfCompaniesLoader.listOfCompanies
+import com.invest.tickerapp.model.data.Company.ListOfCompaniesLoader.listOfTickers
+import com.invest.tickerapp.model.data.ConfigureViewModelAdapter
+import kotlinx.coroutines.*
 
 class ConfigureViewModel : ViewModel() {
     private val _favoriteList = MutableLiveData<MutableList<Company>>()
@@ -19,58 +19,17 @@ class ConfigureViewModel : ViewModel() {
         get() = _stocksList
 
     init {
-        viewModelScope.launch(Dispatchers.Default) {
-            val list = listOf(
-                Company(
-                    "Yandex, LLC",
-                    "YNDX",
-                    "4 764,6 ₽",
-                    "+55 ₽ (1,15%)",
-                    R.drawable.logo_yndx,
-                    true
-                ),
-                Company(
-                    "Apple Inc.",
-                    "AAPL",
-                    "$131.93",
-                    "+$0.12 (1,15%)",
-                    R.drawable.logo_aapl,
-                    true
-                ),
-                Company(
-                    "Alphabet Class A",
-                    "GOOGL",
-                    "$1 825",
-                    "+$0.12 (1,15%)",
-                    R.drawable.logo_googl,
-                    false
-                ),
-                Company(
-                    "Amazon.com",
-                    "AMZN",
 
-                    "$3 204",
-                    "-$0.12 (1,15%)",
-                    R.drawable.logo_amzn,
-                    false
-                ),
-                Company(
-                    "Bank od America Corp",
-                    "BAC",
-                    "$3 204",
-                    "+$0.12 (1,15%)",
-                    R.drawable.logo_bac,
-                    false
-                ),
-                Company(
-                    "Microsoft Corporation",
-                    "MSFT",
-                    "$3 204",
-                    "+$0.12 (1,15%)",
-                    R.drawable.logo_msft,
-                    false
-                )
-            )
+        CoroutineScope(Dispatchers.Default).launch {
+           val list = withContext(Dispatchers.Default) {
+                listOfCompanies.mapIndexed { i, company ->
+                    ConfigureViewModelAdapter.calculateCostAndDeltaCost(
+                        company,
+                        listOfTickers[i],
+                        "c12e84v48v6oi252mgog"
+                    )
+                }
+            }
             _stocksList.postValue(list)
         }
     }
