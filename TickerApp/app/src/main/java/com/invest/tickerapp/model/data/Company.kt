@@ -1,13 +1,28 @@
 package com.invest.tickerapp.model.data
 
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.invest.tickerapp.R
 
+@Entity
 data class Company(
+    @PrimaryKey
     var companyName: String,
+
+    @ColumnInfo(name = "company_name")
     var companyTicker: String,
+
+    @ColumnInfo(name = "cost")
     var cost: String,
+
+    @ColumnInfo(name = "delta_cost")
     var deltaCost: String,
+
+    @ColumnInfo(name = "logo_id_image")
     var logoIdImage: Int,
+
+    @ColumnInfo(name = "star")
     var star: Boolean
 ) {
     object ListOfCompaniesLoader {
@@ -23,7 +38,7 @@ data class Company(
             Company(
                 "Apple Inc.",
                 "AAPL",
-                "$1311111111111.93",
+                "$131.93",
                 "+$0.12 (1,15%)",
                 R.drawable.logo_aapl,
                 false
@@ -31,7 +46,7 @@ data class Company(
             Company(
                 "Alphabet Class A",
                 "GOOGL",
-                "$1 1111111111825",
+                "$1 825",
                 "+$0.12 (1,15%)",
                 R.drawable.logo_googl,
                 false
@@ -40,7 +55,7 @@ data class Company(
                 "Amazon.com",
                 "AMZN",
 
-                "$31111111 204",
+                "$3 204",
                 "-$0.12 (1,15%)",
                 R.drawable.logo_amzn,
                 false
@@ -48,7 +63,7 @@ data class Company(
             Company(
                 "Bank od America Corp",
                 "BAC",
-                "$311111111111 204",
+                "$3 204",
                 "+$0.12 (1,15%)",
                 R.drawable.logo_bac,
                 false
@@ -56,7 +71,7 @@ data class Company(
             Company(
                 "Microsoft Corporation",
                 "MSFT",
-                "$111111111113 204",
+                "$3 204",
                 "+$0.12 (1,15%)",
                 R.drawable.logo_msft,
                 false
@@ -64,7 +79,7 @@ data class Company(
             Company(
                 "Tesla Motors",
                 "TSLA",
-                "$311111111111 204",
+                "$3 204",
                 "+$0.12 (1,15%)",
                 R.drawable.logo_tsla,
                 false
@@ -72,12 +87,14 @@ data class Company(
             Company(
                 "Mastercard",
                 "MA",
-                "$311111111111111 204",
+                "$3 204",
                 "+$0.12 (1,15%)",
                 R.drawable.logo_ma,
                 false
             )
         )
         val listOfTickers: List<String> =  listOfCompanies.map{it.companyTicker}
+
     }
+
 }
