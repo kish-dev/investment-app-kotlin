@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.invest.tickerapp.databinding.FragmentFavoriteBinding
 
+
+
 class FavoriteFragment : UpdateListFragment() {
 
     private lateinit var binding: FragmentFavoriteBinding
@@ -13,7 +15,7 @@ class FavoriteFragment : UpdateListFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
         binding = FragmentFavoriteBinding.inflate(inflater, container, false)
         initRecycler(binding.favoriteRecycler)
         return binding.root

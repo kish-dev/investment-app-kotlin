@@ -9,8 +9,10 @@ import com.invest.tickerapp.R
 import com.invest.tickerapp.databinding.CardCaptionedItemBinding
 import com.invest.tickerapp.model.data.Company
 
-class CardAdapter(var listData: List<Company>) :
-    RecyclerView.Adapter<CardAdapter.CardViewHolder>() {
+@Suppress("DEPRECATION")
+class CardAdapter(
+    var listData: List<Company>
+) : RecyclerView.Adapter<CardAdapter.CardViewHolder>() {
     private var onClickAction: IClickCompany? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder {

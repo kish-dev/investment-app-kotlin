@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.invest.tickerapp.databinding.FragmentStocksBinding
 
+
+
 class StocksFragment : UpdateListFragment() {
 
     private lateinit var binding: FragmentStocksBinding
@@ -14,7 +16,7 @@ class StocksFragment : UpdateListFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
         binding = FragmentStocksBinding.inflate(inflater, container, false)
         initRecycler(binding.stocksRecycler)
         return binding.root

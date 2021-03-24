@@ -93,8 +93,6 @@ data class Company(
                 false
             )
         )
-        val listOfTickers: List<String> =  listOfCompanies.map{it.companyTicker}
-
     }
 
 }
