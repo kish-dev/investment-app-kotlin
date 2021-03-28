@@ -6,12 +6,12 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Singleton
 
 object NetworkService {
 
-    private const val baseUrl: String = BuildConfig.BASE_URL
-
     private val interceptor: HttpLoggingInterceptor = HttpLoggingInterceptor()
+    private const val baseUrl: String = BuildConfig.BASE_URL
 
     init {
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
@@ -26,11 +26,8 @@ object NetworkService {
         .client(client.build())
         .build()
 
-    fun finHubApi(): FinHubApi? {
+    fun finHubApi(): FinHubApi {
         return retrofit.create(FinHubApi::class.java)
     }
 
 }
-
-
-

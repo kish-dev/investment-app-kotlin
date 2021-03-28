@@ -8,6 +8,7 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.transform
+import java.lang.Exception
 //import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 //import javax.inject.Inject
@@ -17,7 +18,14 @@ class ConfigureViewModelAdapter @Inject constructor(
     var companyDataSource: CompanyLocalDataSource
 ) {
 
-    private val service = NetworkService
+    private val service by lazy{NetworkService.finHubApi()}
+
+    private fun Quote.getDeltaCost() = this.currentPrice.toDouble() - this.closePrice.toDouble()
+
+    private fun Double.getSign() = if (this < 0) '-' else '+'
+
+    private fun Double.format() = String.format("%.2f", this)
+
 
     private suspend fun calculateCostAndDeltaCost(
         company: Company,
@@ -25,28 +33,19 @@ class ConfigureViewModelAdapter @Inject constructor(
         token: String
     ): Company {
         try {
-            val result = service.finHubApi()!!.getQuote(ticker, token)
-
+            val result = service.getQuote(ticker, token)
             company.cost = result.currentPrice
-            var delta = (result.currentPrice.toDouble() - result.closePrice.toDouble())
-
-            val sign = if (delta < 0) '-' else '+'
-
+            var delta = result.getDeltaCost()
+            val sign = delta.getSign()
             delta = delta.absoluteValue
-
-            company.deltaCost = String.format("%.2f", delta)
-
-            val percent = delta / company.cost.toDouble()
-
-            val percentString = String.format("%.2f", percent)
-
-
-            company.deltaCost = "${sign}$${company.deltaCost} (${percentString}%)"
+            company.deltaCost = delta.format()
+            val percent = (delta / company.cost.toDouble()).format()
+            company.deltaCost = "${sign}$${company.deltaCost} (${percent}%)"
             company.cost = "$${company.cost}"
 
-        } catch (e: Exception) {
+        }
+        catch (e : Exception) {
             Log.e("CompanyLoader", "${e.message}")
-            e.printStackTrace()
         }
         return company
     }
@@ -84,23 +83,9 @@ class ConfigureViewModelAdapter @Inject constructor(
         dispatcher: CoroutineDispatcher = Dispatchers.Default
     ): List<T> {
         val listJob = list.map {
-            CoroutineTask(it)
+            scope.async(dispatcher) { it.invoke() }
         }
-        listJob.map {
-            scope.async(dispatcher) { it.execute() }
-        }.awaitAll()
-        return listJob.map { it.result }
+        listJob.awaitAll()
+        return listJob.map { it.getCompleted() }
     }
-
-    class CoroutineTask<T>(private val job: suspend () -> T) {
-        private var _result: T? = null
-        val result: T
-            get() = _result!!
-
-        suspend fun execute(): T {
-            _result = job.invoke()
-            return result
-        }
-    }
-
 }

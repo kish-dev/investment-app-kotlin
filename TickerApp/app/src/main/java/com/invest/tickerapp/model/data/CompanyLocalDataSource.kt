@@ -14,7 +14,7 @@ import javax.inject.Singleton
 
 @Singleton
 class CompanyLocalDataSource @Inject constructor(
-    private val companyDao: CompanyDao
+        private val companyDao: CompanyDao
 ) : CompanyDataSource {
 
     override suspend fun addCompany(company: Company) = companyDao.insert(company)

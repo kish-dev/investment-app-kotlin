@@ -33,19 +33,16 @@ object DatabaseModule {
     fun provideDatabase(@ApplicationContext appContext: Context): CompanyDatabase {
         var result: CompanyDatabase? = null
         result = Room.databaseBuilder(
-            appContext,
-            CompanyDatabase::class.java,
-            "company.db"
-        ).addCallback(object : RoomDatabase.Callback() {
-            override fun onCreate(db: SupportSQLiteDatabase) {
-                super.onCreate(db)
-                for (company in Company.ListOfCompaniesLoader.listOfCompanies) {
-                    DataStoreScope.launch(Dispatchers.IO) {
-                        result!!.companyDao().insert(company)
-                    }
+                appContext,
+                CompanyDatabase::class.java,
+                "company.db"
+        ).addCreateCallback {
+            for (company in Company.ListOfCompaniesLoader.listOfCompanies) {
+                DataStoreScope.launch(Dispatchers.IO) {
+                    result!!.companyDao().insert(company)
                 }
             }
-        }).build()
+        }.build()
         return result
     }
 
@@ -58,5 +55,5 @@ object DatabaseModule {
     @IntoMap
     @ViewModelKey(ConfigureViewModel::class)
     fun provideConfigureViewModel(adapter: ConfigureViewModelAdapter): ViewModel =
-        ConfigureViewModel(adapter)
+            ConfigureViewModel(adapter)
 }

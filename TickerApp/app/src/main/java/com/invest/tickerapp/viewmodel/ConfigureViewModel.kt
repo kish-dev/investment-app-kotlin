@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.invest.tickerapp.BuildConfig
 import com.invest.tickerapp.model.data.Company
 import com.invest.tickerapp.model.data.ConfigureViewModelAdapter
 import kotlinx.coroutines.Dispatchers
@@ -29,10 +30,10 @@ class ConfigureViewModel @Inject constructor(
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
-            val listStockServer = adapter.getStockListServer("c12e84v48v6oi252mgog", this).first()
+            val listStockServer = adapter.getStockListServer(Companion.apiKeyToFinHubApi, this).first()
             _stocksList.postValue(listStockServer.toMutableList())
             val listFavoriteServer =
-                adapter.getFavoriteListServer("c12e84v48v6oi252mgog", this).first()
+                adapter.getFavoriteListServer(Companion.apiKeyToFinHubApi, this).first()
             _favoriteList.postValue(listFavoriteServer.toMutableList())
         }
         viewModelScope.launch(Dispatchers.IO) {
@@ -57,5 +58,9 @@ class ConfigureViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             adapter.companyDataSource.update(company)
         }
+    }
+
+    companion object {
+        private const val apiKeyToFinHubApi = BuildConfig.API_KEY_TO_FINHUB
     }
 }

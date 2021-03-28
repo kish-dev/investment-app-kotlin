@@ -10,9 +10,11 @@ class DiffUtils(val oldList: List<Company>, val newList: List<Company>) : DiffUt
     override fun getNewListSize(): Int = newList.size
 
     override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean =
-        oldList[oldItemPosition].companyName == newList[newItemPosition].companyName
+            oldList[oldItemPosition].companyName == newList[newItemPosition].companyName
 
     override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean =
-        oldList[oldItemPosition] == newList[newItemPosition] && oldItemPosition % 2 == newItemPosition % 2
+            oldList[oldItemPosition] == newList[newItemPosition] && oldItemPosition.isEven() == newItemPosition.isEven()
 
 }
+
+fun Int.isEven() = this % 2

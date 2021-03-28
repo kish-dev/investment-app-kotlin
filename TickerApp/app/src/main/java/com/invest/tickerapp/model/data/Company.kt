@@ -25,6 +25,7 @@ data class Company(
     @ColumnInfo(name = "star")
     var star: Boolean
 ) {
+
     object ListOfCompaniesLoader {
         val listOfCompanies: MutableList<Company> = mutableListOf(
             Company(

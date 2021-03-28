@@ -9,7 +9,6 @@ import com.invest.tickerapp.R
 import com.invest.tickerapp.databinding.CardCaptionedItemBinding
 import com.invest.tickerapp.model.data.Company
 
-@Suppress("DEPRECATION")
 class CardAdapter(
     var listData: List<Company>
 ) : RecyclerView.Adapter<CardAdapter.CardViewHolder>() {
@@ -54,7 +53,6 @@ class CardAdapter(
             tickerText.text = company.companyTicker
             costText.text = company.cost
             deltaCostText.text = company.deltaCost
-            //TODO search Glide
             logoIcon.setImageDrawable(
                 ContextCompat.getDrawable(logoIcon.context, company.logoIdImage)
             )
