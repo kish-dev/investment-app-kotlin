@@ -26,9 +26,6 @@ class ConfigureFragment : Fragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
 
-//    @Inject
-//    lateinit var fragmentManager : FragmentManager
-
     private val stocksFragment = StocksFragment()
 
     private val favoriteFragment = FavoriteFragment()
