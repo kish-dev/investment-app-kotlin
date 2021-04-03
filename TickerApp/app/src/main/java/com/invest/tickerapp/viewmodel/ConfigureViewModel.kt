@@ -28,9 +28,14 @@ class ConfigureViewModel @Inject constructor(
     val stocksList: LiveData<MutableList<Company>>
         get() = _stocksList
 
+    private val _searchList = MutableLiveData<MutableList<Company>>()
+    val searchList: LiveData<MutableList<Company>>
+        get() = _searchList
+
     init {
         viewModelScope.launch(Dispatchers.IO) {
-            val listStockServer = adapter.getStockListServer(Companion.apiKeyToFinHubApi, this).first()
+            val listStockServer =
+                adapter.getStockListServer(Companion.apiKeyToFinHubApi, this).first()
             _stocksList.postValue(listStockServer.toMutableList())
             val listFavoriteServer =
                 adapter.getFavoriteListServer(Companion.apiKeyToFinHubApi, this).first()
@@ -44,6 +49,14 @@ class ConfigureViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             adapter.getFavoriteListFlow().drop(1).collect {
                 _favoriteList.postValue(it.toMutableList())
+            }
+        }
+    }
+
+    fun search(searchQueryString: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            adapter.getSearchListFlow(searchQueryString).drop(1).collect {
+                _stocksList.postValue(it.toMutableList())
             }
         }
     }

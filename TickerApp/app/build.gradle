@@ -13,8 +13,8 @@ android {
         applicationId "com.invest.tickerapp"
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "2.0"
 
         buildConfigField "String", "BASE_URL", '"https://finnhub.io/api/v1/"'
         buildConfigField "String", "API_KEY_TO_FINHUB", '"c12e84v48v6oi252mgog"'

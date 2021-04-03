@@ -44,6 +44,9 @@ class ConfigureViewModelAdapter @Inject constructor(
         return company
     }
 
+    suspend fun getSearchListFlow(searchQueryString: String) =
+        companyDataSource.getSearchList(searchQueryString)
+
     suspend fun getStockListFlow() =
         companyDataSource.getStockList()
 

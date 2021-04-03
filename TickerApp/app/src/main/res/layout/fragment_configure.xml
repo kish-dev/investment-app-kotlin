@@ -9,9 +9,22 @@
     tools:context=".MainActivity">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:theme="@style/Theme.TickerApp">
+
+        <SearchView
+            android:id="@+id/search_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:iconifiedByDefault="false"
+            android:queryHint="@string/search"
+
+            app:layout_anchor="@+id/appBarLayout"
+            app:layout_anchorGravity="bottom|center">
+
+        </SearchView>
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
@@ -19,19 +32,24 @@
             android:layout_height="?attr/actionBarSize"
             app:layout_scrollFlags="scroll|enterAlways" />
 
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/pager"
+        android:layout_width="match_parent"
+        android:layout_height="693dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
         </com.google.android.material.tabs.TabLayout>
+    </androidx.viewpager.widget.ViewPager>
 
-    </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.viewpager.widget.ViewPager
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:id="@+id/pager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

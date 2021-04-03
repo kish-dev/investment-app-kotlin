@@ -7,4 +7,5 @@ interface CompanyDataSource {
     suspend fun update(company: Company)
     suspend fun getStockList(): Flow<List<Company>>
     suspend fun getFavoriteList(): Flow<List<Company>>
+    suspend fun getSearchList(searchQueryString: String): Flow<List<Company>>
 }

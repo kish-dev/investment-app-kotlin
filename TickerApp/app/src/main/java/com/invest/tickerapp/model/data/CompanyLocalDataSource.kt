@@ -5,6 +5,8 @@ import android.os.Looper
 import androidx.lifecycle.LiveData
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.util.concurrent.ExecutorService
@@ -24,5 +26,8 @@ class CompanyLocalDataSource @Inject constructor(
     override suspend fun getStockList() = companyDao.getStockCompanies()
 
     override suspend fun getFavoriteList() = companyDao.getFavoriteCompanies()
+
+    override suspend fun getSearchList(searchQueryString: String) =
+        companyDao.getSearchCompanies(searchQueryString)
 
 }
