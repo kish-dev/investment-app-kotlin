@@ -32,7 +32,6 @@ class ConfigureViewModelAdapter @Inject constructor(
         ticker: String,
         token: String
     ): Company {
-        try {
             val result = service.getQuote(ticker, token)
             company.cost = result.currentPrice
             var delta = result.getDeltaCost()
@@ -42,11 +41,6 @@ class ConfigureViewModelAdapter @Inject constructor(
             val percent = (delta / company.cost.toDouble()).format()
             company.deltaCost = "${sign}$${company.deltaCost} (${percent}%)"
             company.cost = "$${company.cost}"
-
-        }
-        catch (e : Exception) {
-            Log.e("CompanyLoader", "${e.message}")
-        }
         return company
     }
 
@@ -57,12 +51,12 @@ class ConfigureViewModelAdapter @Inject constructor(
         companyDataSource.getFavoriteList()
 
     suspend fun getStockListServer(token: String, scope: CoroutineScope) =
-        companyDataSource.getStockList().map {
+       getStockListFlow().map {
             it.toCost(token, scope)
         }
 
     suspend fun getFavoriteListServer(token: String, scope: CoroutineScope) =
-        companyDataSource.getFavoriteList().map {
+        getFavoriteListFlow().map {
             it.toCost(token, scope)
         }
 
@@ -77,7 +71,7 @@ class ConfigureViewModelAdapter @Inject constructor(
             }
         }, scope)
 
-    suspend fun <T> executeAll(
+    private suspend fun <T> executeAll(
         list: List<suspend () -> T>,
         scope: CoroutineScope,
         dispatcher: CoroutineDispatcher = Dispatchers.Default

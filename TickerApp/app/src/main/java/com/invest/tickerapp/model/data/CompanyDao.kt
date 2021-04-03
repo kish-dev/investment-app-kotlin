@@ -7,8 +7,6 @@ import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
 import androidx.room.Query as Query
 
-const val TRUE = 1
-
 @Dao
 interface CompanyDao {
     @Query("SELECT * FROM company ORDER BY company_name")
@@ -24,3 +22,5 @@ interface CompanyDao {
     fun update(company: Company)
 
 }
+
+const val TRUE = 1
