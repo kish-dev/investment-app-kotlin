@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -14,7 +15,9 @@ android {
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
+
         buildConfigField "String", "BASE_URL", '"https://finnhub.io/api/v1/"'
+        buildConfigField "String", "API_KEY_TO_FINHUB", '"c12e84v48v6oi252mgog"'
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -37,6 +40,8 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+
 }
 
 dependencies {
@@ -47,6 +52,7 @@ dependencies {
     // LiveData
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:${var.lifecycle_version}"
     implementation "androidx.lifecycle:lifecycle-livedata-core-ktx:${var.lifecycle_version}"
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     // Annotation processor
     kapt "androidx.lifecycle:lifecycle-compiler:${var.lifecycle_version}"
 
@@ -74,4 +80,12 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:${var.retrofit}"
     implementation "com.squareup.okhttp3:okhttp:${var.okHttp}"
     implementation "com.squareup.okhttp3:logging-interceptor:${var.okHttp}"
+
+
+    // Hilt dependencies
+    implementation "com.google.dagger:hilt-android:$hilt_version"
+    kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
+    annotationProcessor "com.google.dagger:hilt-compiler:${var.hilt}"
+
+    implementation "androidx.fragment:fragment-ktx:${var.ktx}"
 }

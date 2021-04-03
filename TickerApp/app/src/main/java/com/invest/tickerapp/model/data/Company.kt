@@ -25,6 +25,7 @@ data class Company(
     @ColumnInfo(name = "star")
     var star: Boolean
 ) {
+
     object ListOfCompaniesLoader {
         val listOfCompanies: MutableList<Company> = mutableListOf(
             Company(
@@ -93,8 +94,6 @@ data class Company(
                 false
             )
         )
-        val listOfTickers: List<String> =  listOfCompanies.map{it.companyTicker}
-
     }
 
 }

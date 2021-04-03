@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="companies_list_logo_icon_width">52dp</dimen>
+    <dimen name="height_card_view">68dp</dimen>
+    <dimen name="recycler_card_view_margin_start">30dp</dimen>
+    <dimen name="recycler_card_view_card_view_margin_top">4dp</dimen>
+    <dimen name="recycler_card_view_margin_end">30dp</dimen>
+    <dimen name="recycler_card_view_margin_bottom">4dp</dimen>
+    <dimen name="recycler_card_view_corner_radius">16dp</dimen>
+    <dimen name="recycler_card_view_card_elevation">0dp</dimen>
+    <dimen name="companies_list_logo_icon_height">52dp</dimen>
+    <dimen name="companies_list_logo_icon_margin_start">8dp</dimen>
+    <dimen name="companies_list_logo_icon_margin_top">8dp</dimen>
+    <dimen name="companies_list_logo_icon_margin_bottom">8dp</dimen>
+    <dimen name="companies_list_company_text_margin_start">72dp</dimen>
+    <dimen name="companies_list_company_text_margin_top">38dp</dimen>
+    <dimen name="companies_list_company_text_margin_bottom">14dp</dimen>
+    <dimen name="companies_list_ticker_text_margin_start">72dp</dimen>
+    <dimen name="companies_list_ticker_text_margin_top">14dp</dimen>
+    <dimen name="companies_list_ticker_text_margin_bottom">30dp</dimen>
+    <dimen name="companies_list_star_width">28dp</dimen>
+    <dimen name="companies_list_star_height">28dp</dimen>
+    <dimen name="companies_list_star_margin_start">6dp</dimen>
+    <dimen name="companies_list_star_margin_top">17dp</dimen>
+    <dimen name="companies_list_star_margin_bottom">35dp</dimen>
+    <dimen name="companies_list_cost_text_margin_top">14dp</dimen>
+    <dimen name="companies_list_cost_text_margin_end">17dp</dimen>
+    <dimen name="companies_list_cost_text_margin_bottom">30dp</dimen>
+    <dimen name="companies_list_delta_cost_text_margin_top">38dp</dimen>
+    <dimen name="companies_list_delta_cost_text_margin_end">12dp</dimen>
+    <dimen name="companies_list_delta_cost_text_margin_bottom">14dp</dimen>
+</resources>

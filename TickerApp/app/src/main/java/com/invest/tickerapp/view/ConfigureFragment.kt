@@ -1,21 +1,32 @@
 package com.invest.tickerapp.view
 
+import android.app.Application
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentPagerAdapter
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.observe
 import com.invest.tickerapp.IClickCompany
 import com.invest.tickerapp.databinding.FragmentConfigureBinding
 import com.invest.tickerapp.model.data.Company
+import com.invest.tickerapp.model.data.ConfigureViewModelAdapter_Factory
+import com.invest.tickerapp.model.di.ViewModelFactory
 import com.invest.tickerapp.viewmodel.ConfigureViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class ConfigureFragment : Fragment() {
 
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
     private val stocksFragment = StocksFragment()
+
     private val favoriteFragment = FavoriteFragment()
 
     private lateinit var binding: FragmentConfigureBinding
@@ -26,7 +37,7 @@ class ConfigureFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        viewModel = ViewModelProvider(this).get(ConfigureViewModel::class.java)
+        viewModel = viewModels<ConfigureViewModel> { viewModelFactory }.value
         binding = FragmentConfigureBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -49,7 +60,7 @@ class ConfigureFragment : Fragment() {
             }
 
         override fun getCount(): Int = 2
-        override fun getPageTitle(position: Int) : CharSequence? {
+        override fun getPageTitle(position: Int): CharSequence? {
             return when (position) {
                 0 -> resources.getText(com.invest.tickerapp.R.string.stocks_tab)
                 1 -> resources.getText(com.invest.tickerapp.R.string.favorite_tab)

@@ -1,50 +1,66 @@
 package com.invest.tickerapp.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.invest.tickerapp.BuildConfig
 import com.invest.tickerapp.model.data.Company
-import com.invest.tickerapp.model.data.Company.ListOfCompaniesLoader.listOfCompanies
-import com.invest.tickerapp.model.data.Company.ListOfCompaniesLoader.listOfTickers
 import com.invest.tickerapp.model.data.ConfigureViewModelAdapter
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.drop
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class ConfigureViewModel : ViewModel() {
+
+class ConfigureViewModel @Inject constructor(
+    var adapter: ConfigureViewModelAdapter
+) : ViewModel() {
+
     private val _favoriteList = MutableLiveData<MutableList<Company>>()
     val favoriteList: LiveData<MutableList<Company>>
         get() = _favoriteList
 
-    private val _stocksList = MutableLiveData<List<Company>>()
-    val stocksList: LiveData<List<Company>>
+    private val _stocksList = MutableLiveData<MutableList<Company>>()
+    val stocksList: LiveData<MutableList<Company>>
         get() = _stocksList
 
     init {
-
-        CoroutineScope(Dispatchers.Default).launch {
-           val list = withContext(Dispatchers.Default) {
-                listOfCompanies.mapIndexed { i, company ->
-                    ConfigureViewModelAdapter.calculateCostAndDeltaCost(
-                        company,
-                        listOfTickers[i],
-                        "c12e84v48v6oi252mgog"
-                    )
-                }
+        viewModelScope.launch(Dispatchers.IO) {
+            val listStockServer = adapter.getStockListServer(Companion.apiKeyToFinHubApi, this).first()
+            _stocksList.postValue(listStockServer.toMutableList())
+            val listFavoriteServer =
+                adapter.getFavoriteListServer(Companion.apiKeyToFinHubApi, this).first()
+            _favoriteList.postValue(listFavoriteServer.toMutableList())
+        }
+        viewModelScope.launch(Dispatchers.IO) {
+            adapter.getStockListFlow().drop(1).collect {
+                _stocksList.postValue(it.toMutableList())
             }
-            _stocksList.postValue(list)
+        }
+        viewModelScope.launch(Dispatchers.IO) {
+            adapter.getFavoriteListFlow().drop(1).collect {
+                _favoriteList.postValue(it.toMutableList())
+            }
         }
     }
 
     fun addToFavoriteList(company: Company) {
-        val currentList = favoriteList.value ?: mutableListOf()
-        currentList.add(company)
-        _favoriteList.postValue(currentList)
-        _stocksList.postValue(stocksList.value)
+        viewModelScope.launch(Dispatchers.IO) {
+            adapter.companyDataSource.update(company)
+        }
     }
 
     fun removeFromFavoriteList(company: Company) {
-        val currentList = favoriteList.value ?: return
-        currentList.remove(company)
-        _favoriteList.postValue(currentList)
-        _stocksList.postValue(stocksList.value)
+        viewModelScope.launch(Dispatchers.IO) {
+            adapter.companyDataSource.update(company)
+        }
+    }
+
+    companion object {
+        private const val apiKeyToFinHubApi = BuildConfig.API_KEY_TO_FINHUB
     }
 }

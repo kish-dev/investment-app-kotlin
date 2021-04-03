@@ -1,58 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView android:id="@+id/card_view"
-    android:layout_height="68dp"
-    android:layout_marginBottom="4dp"
-    android:layout_marginEnd="30dp"
-    android:layout_marginStart="30dp"
-    android:layout_marginTop="4dp"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_view"
     android:layout_width="match_parent"
-    app:cardCornerRadius="16dp"
-    app:cardElevation="0dp"
+    android:layout_height="@dimen/height_card_view"
+    android:layout_marginStart="@dimen/recycler_card_view_margin_start"
+    android:layout_marginTop="@dimen/recycler_card_view_card_view_margin_top"
+    android:layout_marginEnd="@dimen/recycler_card_view_margin_end"
+    android:layout_marginBottom="@dimen/recycler_card_view_margin_bottom"
+    app:cardCornerRadius="@dimen/recycler_card_view_corner_radius"
+    app:cardElevation="@dimen/recycler_card_view_card_elevation"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    app:layout_constraintTop_toTopOf="parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_width="match_parent">
+        android:background="?selectableItemBackground"
+        android:clickable="true">
 
         <ImageView
             android:id="@+id/logo_icon"
-            android:layout_height="52dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_width="52dp"
+            android:layout_width="@dimen/companies_list_logo_icon_width"
+            android:layout_height="@dimen/companies_list_logo_icon_height"
+            android:layout_marginStart="@dimen/companies_list_logo_icon_margin_start"
+            android:layout_marginTop="@dimen/companies_list_logo_icon_margin_top"
+            android:layout_marginBottom="@dimen/companies_list_logo_icon_margin_bottom"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-        </ImageView>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/company_text"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="14dp"
-            android:layout_marginStart="72dp"
-            android:layout_marginTop="38dp"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/companies_list_company_text_margin_start"
+            android:layout_marginTop="@dimen/companies_list_company_text_margin_top"
+            android:layout_marginBottom="@dimen/companies_list_company_text_margin_bottom"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="1.0"
-            tools:text="company">
-
-        </TextView>
+            tools:text="company" />
 
         <TextView
             android:id="@+id/ticker_text"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="30dp"
-            android:layout_marginStart="72dp"
-            android:layout_marginTop="14dp"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/companies_list_ticker_text_margin_start"
+            android:layout_marginTop="@dimen/companies_list_ticker_text_margin_top"
+            android:layout_marginBottom="@dimen/companies_list_ticker_text_margin_bottom"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -60,13 +59,13 @@
         </TextView>
 
         <CheckBox
-            android:button="@drawable/checkbox_selector"
             android:id="@+id/star"
-            android:layout_height="16dp"
-            android:layout_marginBottom="35dp"
-            android:layout_marginStart="6dp"
-            android:layout_marginTop="17dp"
-            android:layout_width="16dp"
+            android:layout_width="@dimen/companies_list_star_width"
+            android:layout_height="@dimen/companies_list_star_height"
+            android:layout_marginStart="@dimen/companies_list_star_margin_start"
+            android:layout_marginTop="@dimen/companies_list_star_margin_top"
+            android:layout_marginBottom="@dimen/companies_list_star_margin_bottom"
+            android:button="@drawable/checkbox_selector"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/ticker_text"
             app:layout_constraintTop_toTopOf="parent"
@@ -74,11 +73,11 @@
 
         <TextView
             android:id="@+id/cost_text"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="30dp"
-            android:layout_marginEnd="17dp"
-            android:layout_marginTop="14dp"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/companies_list_cost_text_margin_top"
+            android:layout_marginEnd="@dimen/companies_list_cost_text_margin_end"
+            android:layout_marginBottom="@dimen/companies_list_cost_text_margin_bottom"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -88,11 +87,11 @@
 
         <TextView
             android:id="@+id/delta_cost_text"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="14dp"
-            android:layout_marginEnd="12dp"
-            android:layout_marginTop="38dp"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/companies_list_delta_cost_text_margin_top"
+            android:layout_marginEnd="@dimen/companies_list_delta_cost_text_margin_end"
+            android:layout_marginBottom="@dimen/companies_list_delta_cost_text_margin_bottom"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
