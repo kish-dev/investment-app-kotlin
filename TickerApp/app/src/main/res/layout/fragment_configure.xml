@@ -11,7 +11,7 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="@dimen/header_toolbar_app_bar_layout_height"
         android:theme="@style/Theme.TickerApp">
 
         <SearchView
