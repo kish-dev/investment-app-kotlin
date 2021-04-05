@@ -15,7 +15,6 @@ abstract class CompanyDatabase : RoomDatabase() {
 fun <T : RoomDatabase> RoomDatabase.Builder<T>.addCreateCallback(insert: () -> Unit) =
         this.addCallback(object : RoomDatabase.Callback() {
             override fun onCreate(db: SupportSQLiteDatabase) {
-                Log.e("RoomDatabase", "ПЕРЕСОЗДАНИЕ БДПЕРЕСОЗДАНИЕ БДПЕРЕСОЗДАНИЕ БДПЕРЕСОЗДАНИЕ БДПЕРЕСОЗДАНИЕ БДПЕРЕСОЗДАНИЕ БДПЕРЕСОЗДАНИЕ БДПЕРЕСОЗДАНИЕ БДПЕРЕСОЗДАНИЕ БДПЕРЕСОЗДАНИЕ БДПЕРЕСОЗДАНИЕ БДПЕРЕСОЗДАНИЕ БДПЕРЕСОЗДАНИЕ БДПЕРЕСОЗДАНИЕ БДПЕРЕСОЗДАНИЕ БДПЕРЕСОЗДАНИЕ БДПЕРЕСОЗДАНИЕ БДПЕРЕСОЗДАНИЕ БДПЕРЕСОЗДАНИЕ БДПЕРЕСОЗДАНИЕ БДПЕРЕСОЗДАНИЕ БДПЕРЕСОЗДАНИЕ БДПЕРЕСОЗДАНИЕ БДПЕРЕСОЗДАНИЕ БДПЕРЕСОЗДАНИЕ БДПЕРЕСОЗДАНИЕ БДПЕРЕСОЗДАНИЕ БДПЕРЕСОЗДАНИЕ БДПЕРЕСОЗДАНИЕ БДПЕРЕСОЗДАНИЕ БДПЕРЕСОЗДАНИЕ БДПЕРЕСОЗДАНИЕ БД")
                 super.onCreate(db)
                 insert.invoke()
             }
