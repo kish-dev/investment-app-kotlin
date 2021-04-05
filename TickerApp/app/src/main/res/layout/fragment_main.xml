@@ -11,9 +11,9 @@
         android:id="@+id/deleteIcon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="70dp"
         android:src="@drawable/delete_icon"
         android:visibility="gone"
-        android:layout_marginTop="70dp"
         app:layout_constraintStart_toEndOf="@id/search_view"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -22,7 +22,7 @@
         android:id="@+id/searchIcon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="@dimen/margin_top__searchIcon"
         android:src="@drawable/search_icon"
         android:visibility="visible"
 
@@ -34,7 +34,7 @@
         android:id="@+id/backIcon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="@dimen/marginTop__backIcon"
         android:src="@drawable/back_icon"
         android:visibility="gone"
         app:layout_constraintEnd_toStartOf="@id/search_view"
@@ -43,11 +43,11 @@
 
     <EditText
         android:id="@+id/search_view"
-        android:layout_marginTop="50dp"
-        android:layout_width="320dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:layout_height="50dp"
+        android:layout_width="@dimen/width__searchView"
+        android:layout_height="@dimen/height__searchView"
+        android:layout_marginLeft="@dimen/margin_left__searchView"
+        android:layout_marginTop="@dimen/marginTop__searchView"
+        android:layout_marginRight="@dimen/margin_right__searchView"
         android:iconifiedByDefault="false"
         android:inputType="text"
         android:queryHint="@string/search"
@@ -60,7 +60,7 @@
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="@dimen/margin_top__nav_host_fragment"
         app:defaultNavHost="true"
         app:layout_constraintTop_toBottomOf="@+id/search_view"
         app:navGraph="@navigation/navigation" />

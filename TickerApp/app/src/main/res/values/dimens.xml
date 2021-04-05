@@ -30,4 +30,12 @@
     <dimen name="companies_list_delta_cost_text_margin_end">12dp</dimen>
     <dimen name="companies_list_delta_cost_text_margin_bottom">14dp</dimen>
     <dimen name="header_toolbar_app_bar_layout_height">40dp</dimen>
+    <dimen name="margin_top__searchIcon">70dp</dimen>
+    <dimen name="marginTop__backIcon">70dp</dimen>
+    <dimen name="marginTop__searchView">50dp</dimen>
+    <dimen name="width__searchView">320dp</dimen>
+    <dimen name="margin_left__searchView">30dp</dimen>
+    <dimen name="margin_right__searchView">30dp</dimen>
+    <dimen name="height__searchView">50dp</dimen>
+    <dimen name="margin_top__nav_host_fragment">100dp</dimen>
 </resources>
