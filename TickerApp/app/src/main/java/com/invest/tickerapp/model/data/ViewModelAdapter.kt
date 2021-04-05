@@ -11,10 +11,11 @@ import kotlinx.coroutines.flow.transform
 import java.lang.Exception
 //import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
+import javax.inject.Singleton
 //import javax.inject.Inject
 import kotlin.math.absoluteValue
 
-class ConfigureViewModelAdapter @Inject constructor(
+class ViewModelAdapter @Inject constructor(
     var companyDataSource: CompanyLocalDataSource
 ) {
 
@@ -41,6 +42,7 @@ class ConfigureViewModelAdapter @Inject constructor(
             val percent = (delta / company.cost.toDouble()).format()
             company.deltaCost = "${sign}$${company.deltaCost} (${percent}%)"
             company.cost = "$${company.cost}"
+        companyDataSource.update(company)
         return company
     }
 

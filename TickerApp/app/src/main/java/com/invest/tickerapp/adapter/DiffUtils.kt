@@ -3,7 +3,7 @@ package com.invest.tickerapp.adapter
 import androidx.recyclerview.widget.DiffUtil
 import com.invest.tickerapp.model.data.Company
 
-class DiffUtils(val oldList: List<Company>, val newList: List<Company>) : DiffUtil.Callback() {
+class DiffUtils(private val oldList: List<Company>, private val newList: List<Company>) : DiffUtil.Callback() {
 
     override fun getOldListSize(): Int = oldList.size
 

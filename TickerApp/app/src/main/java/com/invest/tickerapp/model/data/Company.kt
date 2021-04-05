@@ -8,9 +8,10 @@ import com.invest.tickerapp.R
 @Entity
 data class Company(
     @PrimaryKey
+    @ColumnInfo(name = "company_name")
     var companyName: String,
 
-    @ColumnInfo(name = "company_name")
+    @ColumnInfo(name = "company_ticker")
     var companyTicker: String,
 
     @ColumnInfo(name = "cost")
