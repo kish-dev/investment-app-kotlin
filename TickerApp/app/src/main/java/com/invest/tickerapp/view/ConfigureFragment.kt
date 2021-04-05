@@ -1,20 +1,21 @@
 package com.invest.tickerapp.view
 
-import android.app.Application
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.SearchView
+import android.widget.EditText
+import android.widget.ImageView
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.*
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.observe
+import androidx.navigation.NavController
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import com.invest.tickerapp.IClickCompany
 import com.invest.tickerapp.R
 import com.invest.tickerapp.databinding.FragmentConfigureBinding
 import com.invest.tickerapp.model.data.Company
-import com.invest.tickerapp.model.data.ConfigureViewModelAdapter_Factory
 import com.invest.tickerapp.model.di.ViewModelFactory
 import com.invest.tickerapp.viewmodel.ConfigureViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -30,13 +31,9 @@ class ConfigureFragment : Fragment() {
 
     private val favoriteFragment = FavoriteFragment()
 
-    private val searchFragment = SearchFragment()
-
     private lateinit var binding: FragmentConfigureBinding
 
-    private lateinit var viewModel: ConfigureViewModel
-
-    private lateinit var mySearchView: SearchView
+    private lateinit var viewModel : ConfigureViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,21 +42,6 @@ class ConfigureFragment : Fragment() {
 
         viewModel = viewModels<ConfigureViewModel> { viewModelFactory }.value
         binding = FragmentConfigureBinding.inflate(inflater, container, false)
-        mySearchView = binding.searchView
-
-
-        mySearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
-            androidx.appcompat.widget.SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                return true
-            }
-
-            override fun onQueryTextChange(searchQueryString: String?): Boolean {
-                searchQueryString?.let { viewModel.search(searchQueryString) }
-                return true
-            }
-        }
-        )
 
         return binding.root
     }
@@ -104,7 +86,6 @@ class ConfigureFragment : Fragment() {
             }
         }
         favoriteFragment.onClickAction = stocksFragment.onClickAction
-        searchFragment.onClickAction = stocksFragment.onClickAction
     }
 
     private fun ConfigureViewModel.initObservers() {
@@ -113,9 +94,6 @@ class ConfigureFragment : Fragment() {
         }
         stocksList.observe(viewLifecycleOwner) {
             stocksFragment.update(it)
-        }
-        searchList.observe(viewLifecycleOwner) {
-            searchFragment.update(it)
         }
     }
 }

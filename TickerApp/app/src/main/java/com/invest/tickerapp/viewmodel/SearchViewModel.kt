@@ -14,36 +14,32 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-
-class ConfigureViewModel @Inject constructor(
+class SearchViewModel @Inject constructor(
     var adapter: ViewModelAdapter
 ) : ViewModel() {
 
-    private val _favoriteList = MutableLiveData<MutableList<Company>>()
-    val favoriteList: LiveData<MutableList<Company>>
-        get() = _favoriteList
-
-    private val _stocksList = MutableLiveData<MutableList<Company>>()
-    val stocksList: LiveData<MutableList<Company>>
-        get() = _stocksList
+    private val _searchList = MutableLiveData<MutableList<Company>>()
+    val searchList: LiveData<MutableList<Company>>
+        get() = _searchList
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
             val listStockServer =
                 adapter.getStockListServer(apiKeyToFinHubApi, this).first()
-            _stocksList.postValue(listStockServer.toMutableList())
-            val listFavoriteServer =
-                adapter.getFavoriteListServer(apiKeyToFinHubApi, this).first()
-            _favoriteList.postValue(listFavoriteServer.toMutableList())
+            _searchList.postValue(listStockServer.toMutableList())
         }
+
         viewModelScope.launch(Dispatchers.IO) {
             adapter.getStockListFlow().drop(1).collect {
-                _stocksList.postValue(it.toMutableList())
+                _searchList.postValue(it.toMutableList())
             }
         }
+    }
+
+    fun search(searchQueryString: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            adapter.getFavoriteListFlow().drop(1).collect {
-                _favoriteList.postValue(it.toMutableList())
+            adapter.getSearchListFlow(searchQueryString).drop(1).collect {
+                _searchList.postValue(it.toMutableList())
             }
         }
     }

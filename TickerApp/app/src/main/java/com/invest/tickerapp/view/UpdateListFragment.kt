@@ -8,7 +8,6 @@ import com.invest.tickerapp.adapter.CardAdapter
 import com.invest.tickerapp.adapter.DiffUtils
 import com.invest.tickerapp.model.data.Company
 
-
 open class UpdateListFragment : Fragment() {
 
     open var adapter: CardAdapter? = null

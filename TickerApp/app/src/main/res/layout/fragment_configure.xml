@@ -1,39 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/fragment_data"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_data"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".MainActivity">
-
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appBarLayout"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/header_toolbar_app_bar_layout_height"
-        android:theme="@style/Theme.TickerApp">
-
-        <SearchView
-            android:id="@+id/search_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:iconifiedByDefault="false"
-            android:queryHint="@string/search"
-
-            app:layout_anchor="@+id/appBarLayout"
-            app:layout_anchorGravity="bottom|center">
-
-        </SearchView>
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="wrap_content"
-            android:layout_height="?attr/actionBarSize"
-            app:layout_scrollFlags="scroll|enterAlways" />
-
-
-    </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/pager"
@@ -48,8 +21,5 @@
 
         </com.google.android.material.tabs.TabLayout>
     </androidx.viewpager.widget.ViewPager>
-
-
-
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

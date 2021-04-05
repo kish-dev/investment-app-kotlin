@@ -6,8 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import com.invest.tickerapp.databinding.FragmentStocksBinding
 
-
-
 class StocksFragment : UpdateListFragment() {
 
     private lateinit var binding: FragmentStocksBinding

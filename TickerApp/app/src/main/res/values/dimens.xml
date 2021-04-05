@@ -29,4 +29,5 @@
     <dimen name="companies_list_delta_cost_text_margin_top">38dp</dimen>
     <dimen name="companies_list_delta_cost_text_margin_end">12dp</dimen>
     <dimen name="companies_list_delta_cost_text_margin_bottom">14dp</dimen>
+    <dimen name="header_toolbar_app_bar_layout_height">40dp</dimen>
 </resources>
